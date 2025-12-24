@@ -64,6 +64,10 @@ export default function SignUpForm() {
       password: form.getValues().password,
       callbackURL: "/admin",
     });
+
+    if (error) {
+      setServerError(error.message || "Что-то пошло не так.");
+    }
   };
 
   return (

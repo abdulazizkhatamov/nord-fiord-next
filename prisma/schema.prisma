@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id            String    @id
+  id            String    @id @default(cuid())
   name          String
   email         String
   emailVerified Boolean   @default(false)
@@ -29,7 +29,7 @@ model User {
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @default(cuid())
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
@@ -45,11 +45,10 @@ model Session {
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(cuid())
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?
   refreshToken          String?
   idToken               String?
@@ -59,13 +58,14 @@ model Account {
   password              String?
   createdAt             DateTime  @default(now())
   updatedAt             DateTime  @updatedAt
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
   @@map("account")
 }
 
 model Verification {
-  id         String   @id
+  id         String   @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -74,4 +74,114 @@ model Verification {
 
   @@index([identifier])
   @@map("verification")
+}
+
+model Product {
+  id           String              @id @default(cuid())
+  name         String
+  slug         String              @unique
+  description  Json
+  availability Boolean
+  categoryId   String
+  category     Category            @relation(fields: [categoryId], references: [id])
+  images       ProductImage[]
+  forms        ProductForm[] // capsules, chewable, etc.
+  effects      ProductEffect[] // beauty, cleansing, anti-age
+  ingredients  ProductIngredient[] // vitamin C, collagen, etc.
+  audiences    ProductAudience[] // women, men, adults
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id       String     @id @default(cuid())
+  name     String
+  slug     String     @unique
+  parentId String?
+  parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])
+  children Category[] @relation("CategoryHierarchy")
+  products Product[]
+}
+
+model ProductImage {
+  id        String   @id @default(cuid())
+  url       String
+  altText   String?
+  isPrimary Boolean  @default(false)
+  order     Int      @default(0)
+  productId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+}
+
+model Form {
+  id       String        @id @default(cuid())
+  name     String        @unique
+  products ProductForm[]
+}
+
+model ProductForm {
+  productId String
+  formId    String
+  form      Form    @relation(fields: [formId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
+
+  @@id([productId, formId])
+}
+
+model Effect {
+  id       String          @id @default(cuid())
+  name     String
+  slug     String          @unique
+  parentId String?
+  parent   Effect?         @relation("EffectHierarchy", fields: [parentId], references: [id])
+  children Effect[]        @relation("EffectHierarchy")
+  products ProductEffect[]
+}
+
+model ProductEffect {
+  productId String
+  effectId  String
+  product   Product @relation(fields: [productId], references: [id])
+  effect    Effect  @relation(fields: [effectId], references: [id])
+
+  @@id([productId, effectId])
+}
+
+model Ingredient {
+  id       String              @id @default(cuid())
+  name     String
+  slug     String              @unique
+  parentId String?
+  parent   Ingredient?         @relation("IngredientHierarchy", fields: [parentId], references: [id])
+  children Ingredient[]        @relation("IngredientHierarchy")
+  products ProductIngredient[]
+}
+
+model ProductIngredient {
+  productId    String
+  ingredientId String
+  product      Product    @relation(fields: [productId], references: [id])
+  ingredient   Ingredient @relation(fields: [ingredientId], references: [id])
+
+  @@id([productId, ingredientId])
+}
+
+model Audience {
+  id       String            @id @default(cuid())
+  name     String            @unique
+  products ProductAudience[]
+}
+
+model ProductAudience {
+  productId  String
+  audienceId String
+  product    Product  @relation(fields: [productId], references: [id])
+  audience   Audience @relation(fields: [audienceId], references: [id])
+
+  @@id([productId, audienceId])
 }
