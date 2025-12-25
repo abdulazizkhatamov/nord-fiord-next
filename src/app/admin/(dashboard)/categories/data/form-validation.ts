@@ -17,6 +17,5 @@ export const validateUpdateCategoryForm = z.object({
     .min(1, "Название категории не может быть пустым")
     .max(100, "Название категории слишком длинное")
     .optional(),
-
   parentId: z.string().nullable().optional(),
 });

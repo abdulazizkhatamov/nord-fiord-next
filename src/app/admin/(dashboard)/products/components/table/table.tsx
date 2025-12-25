@@ -31,7 +31,7 @@ interface TableProps<TData, TValue> {
   onFilterChange: (dataFilters: Partial<TData>) => void;
 }
 
-export function CategoriesTable<TData, TValue>({
+export function ProductsTable<TData, TValue>({
   columns,
   data,
   pagination,

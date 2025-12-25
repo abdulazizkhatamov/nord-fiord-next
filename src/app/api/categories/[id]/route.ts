@@ -17,21 +17,21 @@ export async function GET(
 
     if (!category)
       return NextResponse.json(
-        { error: "Category not found" },
+        { error: "Категория не найдена" },
         { status: 404 }
       );
 
     return NextResponse.json(category);
   } catch {
     return NextResponse.json(
-      { error: "Failed to fetch category" },
+      { error: "Не удалось получить категорию" },
       { status: 500 }
     );
   }
 }
 
 const categoryUpdateSchema = z.object({
-  name: z.string().min(1, "Name cannot be empty").optional(),
+  name: z.string().min(1, "Имя не может быть пустым.").optional(),
   parentId: z.string().nullable().optional(),
 });
 
@@ -52,13 +52,16 @@ export async function PUT(
     });
 
     if (!dbCategory) {
-      return NextResponse.json({ error: "No category found" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Категория не найдена" },
+        { status: 400 }
+      );
     }
 
     // 3️⃣ Validate parent
     if (parentId === id) {
       return NextResponse.json(
-        { error: "Category cannot be its own parent" },
+        { error: "Категория не может быть своим собственным родителем." },
         { status: 400 }
       );
     }
@@ -70,7 +73,7 @@ export async function PUT(
 
       if (!parentExists) {
         return NextResponse.json(
-          { error: "Parent category not found" },
+          { error: "Родительская категория не найдена" },
           { status: 400 }
         );
       }
@@ -105,7 +108,7 @@ export async function PUT(
 
     console.error(error);
     return NextResponse.json(
-      { error: "Failed to update category" },
+      { error: "Не удалось отредактировать категорию" },
       { status: 500 }
     );
   }
@@ -118,10 +121,10 @@ export async function DELETE(
   const { id } = params;
   try {
     await prisma.category.delete({ where: { id } });
-    return NextResponse.json({ message: "Category deleted" });
+    return NextResponse.json({ message: "Категория удалена" });
   } catch {
     return NextResponse.json(
-      { error: "Failed to delete category" },
+      { error: "Не удалось удалить категорию" },
       { status: 500 }
     );
   }

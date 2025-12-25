@@ -12,7 +12,9 @@ const categoryFilterSchema = z.object({
 
 // POST - Create schema
 const categoryCreateSchema = z.object({
-  name: z.string("Name is required").min(1, "Name cannot be empty"),
+  name: z
+    .string("Имя обязательно для указания.")
+    .min(1, "Имя не может быть пустым."),
   parentId: z.string().optional().nullable(), // optional parentId
 });
 
@@ -67,7 +69,7 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 400 });
     }
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Внутренняя ошибка сервера" },
       { status: 500 }
     );
   }
@@ -86,7 +88,7 @@ export async function POST(req: NextRequest) {
       });
       if (!parentCategory) {
         return NextResponse.json(
-          { error: "Parent category not found" },
+          { error: "Родительская категория не найдена" },
           { status: 400 }
         );
       }
@@ -115,7 +117,7 @@ export async function POST(req: NextRequest) {
     }
     console.error(error);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: "Внутренняя ошибка сервера" },
       { status: 500 }
     );
   }

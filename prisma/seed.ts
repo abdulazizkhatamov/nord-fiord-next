@@ -3,6 +3,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import "dotenv/config";
 import {
   audienceData,
+  categoryData,
   effectData,
   formData,
   ingredientData,
@@ -17,6 +18,9 @@ const prisma = new PrismaClient({
 });
 
 export async function main() {
+  for (const u of categoryData) {
+    await prisma.category.create({ data: u });
+  }
   for (const u of formData) {
     await prisma.form.create({ data: u });
   }

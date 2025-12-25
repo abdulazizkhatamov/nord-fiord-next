@@ -1,6 +1,105 @@
 import slugify from "slugify";
 import { Prisma } from "@/generated/prisma/client";
 
+export const categoryData: Prisma.CategoryCreateInput[] = [
+  {
+    name: "Food & Beverages",
+    slug: slugify("Food & Beverages", { lower: true }),
+    children: {
+      create: [
+        {
+          name: "Coffee & Tea",
+          slug: slugify("Coffee & Tea", { lower: true }),
+        },
+      ],
+    },
+  },
+  {
+    name: "Supplements",
+    slug: slugify("Supplements", { lower: true }),
+    children: {
+      create: [
+        {
+          name: "Bee Products",
+          slug: slugify("Bee Products", { lower: true }),
+        },
+        {
+          name: "Bone, Joint & Cartilage",
+          slug: slugify("Bone, Joint & Cartilage", { lower: true }),
+        },
+        {
+          name: "Brain & Cognitive",
+          slug: slugify("Brain & Cognitive", { lower: true }),
+        },
+        {
+          name: "Digestive Support",
+          slug: slugify("Digestive Support", { lower: true }),
+        },
+        {
+          name: "Eye, Ear & Nose",
+          slug: slugify("Eye, Ear & Nose", { lower: true }),
+        },
+        {
+          name: "Fish Oil & Omega Fatty Acids",
+          slug: slugify("Fish Oil & Omega Fatty Acids", { lower: true }),
+        },
+        {
+          name: "Greens & Superfoods",
+          slug: slugify("Greens & Superfoods", { lower: true }),
+        },
+        {
+          name: "Mushroom Products",
+          slug: slugify("Mushroom Products", { lower: true }),
+        },
+        {
+          name: "Sexual & Reproductive Wellness",
+          slug: slugify("Sexual & Reproductive Wellness", { lower: true }),
+        },
+        {
+          name: "Skin, Hair & Nail Health",
+          slug: slugify("Skin, Hair & Nail Health", { lower: true }),
+        },
+        {
+          name: "Sleep & Relaxation",
+          slug: slugify("Sleep & Relaxation", { lower: true }),
+        },
+        {
+          name: "Specialty Supplements",
+          slug: slugify("Specialty Supplements", { lower: true }),
+        },
+        {
+          name: "Vitamins & Minerals",
+          slug: slugify("Vitamins & Minerals", { lower: true }),
+        },
+        {
+          name: "Weight Management",
+          slug: slugify("Weight Management", { lower: true }),
+        },
+        {
+          name: "Proteins",
+          slug: slugify("Proteins", { lower: true }),
+        },
+        {
+          name: "Muscle Builders",
+          slug: slugify("Muscle Builders", { lower: true }),
+        },
+        {
+          name: "Pre-Workout Supplements",
+          slug: slugify("Pre-Workout Supplements", { lower: true }),
+        },
+        {
+          name: "Intra-Workout Supplements",
+          slug: slugify("Intra-Workout Supplements", { lower: true }),
+        },
+        {
+          name: "Post-Workout Recovery",
+          slug: slugify("Post-Workout Recovery", { lower: true }),
+        },
+      ],
+    },
+  },
+];
+
 export const formData: Prisma.FormCreateInput[] = [
   {
     name: "Capsules",

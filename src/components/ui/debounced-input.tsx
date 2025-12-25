@@ -1,5 +1,6 @@
-import { useEffect, useState, ChangeEvent } from "react";
+import React, { useState } from "react";
 import { TextInput, TextInputProps } from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
 
 type DebouncedInputProps = Omit<TextInputProps, "onChange" | "size"> & {
   value: string;
@@ -10,34 +11,27 @@ type DebouncedInputProps = Omit<TextInputProps, "onChange" | "size"> & {
 export function DebouncedInput({
   value: initialValue,
   onChange,
-  debounce = 200,
+  debounce = 500,
   ...props
 }: DebouncedInputProps) {
-  const [value, setValue] = useState<string>(initialValue);
+  const [value, setValue] = useState(initialValue);
+  const [debounced] = useDebouncedValue(value, debounce);
 
-  useEffect(() => {
+  // Update parent whenever debounced value changes
+  React.useEffect(() => {
+    onChange(debounced);
+  }, [debounced, onChange]);
+
+  // Keep local value in sync with external value
+  React.useEffect(() => {
     setValue(initialValue);
   }, [initialValue]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      onChange(value);
-    }, debounce);
-
-    return () => clearTimeout(timeout);
-  }, [value, debounce, onChange]);
 
   return (
     <TextInput
       {...props}
       value={value}
-      onChange={(e: ChangeEvent<HTMLInputElement>) => {
-        if (e.currentTarget.value === "") {
-          setValue("");
-          return;
-        }
-        setValue(e.currentTarget.value);
-      }}
+      onChange={(e) => setValue(e.currentTarget.value)}
     />
   );
 }

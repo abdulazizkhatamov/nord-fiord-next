@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useForm } from "@mantine/form";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Alert, Box, Button, Group, TextInput } from "@mantine/core";
 
 import { postCategory, getCategories } from "../../api/api";
@@ -11,10 +11,12 @@ import { zod4Resolver } from "mantine-form-zod-resolver";
 import { toast } from "sonner";
 
 export default function CreateCategoryForm() {
+  const queryClient = useQueryClient();
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: postCategory,
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.info("Категория успешно создана");
+      await queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
       toast.error("Что-то пошло не так.");

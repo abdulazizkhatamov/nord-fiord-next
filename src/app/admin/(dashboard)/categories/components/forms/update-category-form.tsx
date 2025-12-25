@@ -1,6 +1,10 @@
 "use client";
 import { useForm } from "@mantine/form";
-import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import {
+  useMutation,
+  useQueryClient,
+  useSuspenseQuery,
+} from "@tanstack/react-query";
 import { Alert, Box, Button, Group, TextInput } from "@mantine/core";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
@@ -23,14 +27,16 @@ type UpdateCategoryPayload = {
 export default function UpdateCategoryForm({
   category,
 }: UpdateCategoryFormProps) {
+  const queryClient = useQueryClient();
   const { data } = useSuspenseQuery({
     queryKey: ["categories", category.id],
     queryFn: () => getCategory(category.id),
   });
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: putCategory,
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.info("Категория успешно отредактирована");
+      await queryClient.invalidateQueries({ queryKey: ["categories"] });
     },
     onError: () => {
       toast.error("Что-то пошло не так.");
