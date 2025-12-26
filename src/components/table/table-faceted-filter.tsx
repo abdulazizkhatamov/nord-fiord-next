@@ -110,7 +110,10 @@ export function TableFacetedFilter<TData, TValue>({
                       }
 
                       const filterValues = Array.from(selectedValues);
+
                       onFilterChange({
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                        // @ts-ignore
                         [filterKey]: filterValues.length
                           ? filterValues
                           : undefined,
@@ -129,7 +132,13 @@ export function TableFacetedFilter<TData, TValue>({
                 variant="subtle"
                 size="xs"
                 color="red"
-                onClick={() => onFilterChange({ [filterKey]: undefined })}
+                onClick={() =>
+                  onFilterChange({
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    [filterKey]: undefined,
+                  })
+                }
               >
                 Clear filters
               </Button>
