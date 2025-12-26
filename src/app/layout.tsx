@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Roboto, Roboto_Mono } from "next/font/google";
 import "@mantine/core/styles.css";
 import "@mantine/tiptap/styles.css";
+import "@mantine/carousel/styles.css";
 import Providers from "./providers";
 
 const robotoSans = Roboto({
