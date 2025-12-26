@@ -10,8 +10,8 @@ import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { putCategory, getCategories, getCategory } from "../../api/api";
 import { validateUpdateCategoryForm } from "../../data/form-validation";
-import { DebouncedCombobox } from "@/components/ui/debounced-combobox";
 import { toast } from "sonner";
+import { DebouncedSelect } from "@/components/ui/debounced-select";
 
 interface UpdateCategoryFormProps {
   category: {
@@ -46,7 +46,7 @@ export default function UpdateCategoryForm({
   const form = useForm({
     initialValues: {
       name: data.name,
-      parentId: data.parentId,
+      parentId: data.parentId ?? "",
     },
     validate: zod4Resolver(validateUpdateCategoryForm),
     validateInputOnBlur: true,
@@ -93,7 +93,7 @@ export default function UpdateCategoryForm({
       />
 
       <Box mt="md">
-        <DebouncedCombobox
+        <DebouncedSelect
           label="Родительская категория"
           placeholder="Поиск категории"
           value={form.values.parentId}
@@ -105,6 +105,7 @@ export default function UpdateCategoryForm({
               value: category.id,
             }));
           }}
+          error={form.errors.parentId}
         />
       </Box>
 

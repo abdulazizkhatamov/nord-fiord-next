@@ -14,6 +14,7 @@ export async function GET(
       where: { id },
       include: {
         category: true,
+        images: true,
         forms: {
           include: { form: true },
         },
@@ -154,6 +155,7 @@ export async function PUT(
       data,
       include: {
         category: true,
+        images: true,
         forms: {
           include: { form: true },
         },

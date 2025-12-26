@@ -69,6 +69,7 @@ export async function GET(request: NextRequest) {
       orderBy,
       include: {
         category: true,
+        images: true,
         forms: {
           include: { form: true },
         },
@@ -170,6 +171,7 @@ export async function POST(req: NextRequest) {
       },
       include: {
         category: true,
+        images: true,
         forms: {
           include: { form: true },
         },

@@ -145,7 +145,7 @@ export default function UpdateProductForm({ product }: UpdateProductFormProps) {
         />
 
         <Button type="submit" loading={isPending}>
-          Редактировать товар
+          Сохранить изменения
         </Button>
       </Stack>
     </form>

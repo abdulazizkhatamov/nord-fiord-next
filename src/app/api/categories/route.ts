@@ -15,7 +15,7 @@ const categoryCreateSchema = z.object({
   name: z
     .string("Имя обязательно для указания.")
     .min(1, "Имя не может быть пустым."),
-  parentId: z.string().optional().nullable(), // optional parentId
+  parentId: z.cuid().or(z.literal("")).optional(), // optional parentId
 });
 
 // Merge schemas

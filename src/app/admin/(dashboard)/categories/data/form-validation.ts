@@ -8,7 +8,7 @@ export const validateCreateCategoryForm = z.object({
     .min(1, "Название категории не может быть пустым")
     .max(100, "Название категории слишком длинное"),
 
-  parentId: z.cuid("Некорректный ID родительской категории").nullable(),
+  parentId: z.cuid("Некорректный ID родительской категории").or(z.literal("")),
 });
 
 export const validateUpdateCategoryForm = z.object({
@@ -17,5 +17,5 @@ export const validateUpdateCategoryForm = z.object({
     .min(1, "Название категории не может быть пустым")
     .max(100, "Название категории слишком длинное")
     .optional(),
-  parentId: z.string().nullable().optional(),
+  parentId: z.cuid().or(z.literal("")).optional(),
 });

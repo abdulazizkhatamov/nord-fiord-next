@@ -32,7 +32,7 @@ export async function GET(
 
 const categoryUpdateSchema = z.object({
   name: z.string().min(1, "Имя не может быть пустым.").optional(),
-  parentId: z.string().nullable().optional(),
+  parentId: z.string().or(z.literal("")).optional(),
 });
 
 export async function PUT(
@@ -44,7 +44,9 @@ export async function PUT(
     const body = await req.json();
 
     // 1️⃣ Validate body
-    const { name, parentId } = categoryUpdateSchema.parse(body);
+    const { name, parentId: rawParentId } = categoryUpdateSchema.parse(body);
+
+    const parentId = rawParentId === "" ? null : rawParentId;
 
     // 2️⃣ Find existing category
     const dbCategory = await prisma.category.findUnique({
@@ -116,9 +118,9 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params;
   try {
     await prisma.category.delete({ where: { id } });
     return NextResponse.json({ message: "Категория удалена" });

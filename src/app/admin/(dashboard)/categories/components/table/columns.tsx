@@ -25,9 +25,14 @@ export const categoryColumns: Array<ColumnDef<CategoryType>> = [
   {
     id: "actions",
     cell: ({ row }) => (
-      <div className="flex items-center justify-end gap-2 min-w-[80px]">
+      <Flex
+        justify="flex-end"
+        align="center"
+        gap="sm"
+        style={{ minWidth: 80, paddingRight: 20 }} // Add some right padding
+      >
         <TableRowActions row={row} />
-      </div>
+      </Flex>
     ),
   },
 ];

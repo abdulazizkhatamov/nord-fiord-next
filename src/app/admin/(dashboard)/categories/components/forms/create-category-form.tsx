@@ -6,9 +6,9 @@ import { Alert, Box, Button, Group, TextInput } from "@mantine/core";
 
 import { postCategory, getCategories } from "../../api/api";
 import { validateCreateCategoryForm } from "../../data/form-validation";
-import { DebouncedCombobox } from "@/components/ui/debounced-combobox";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import { toast } from "sonner";
+import { DebouncedSelect } from "@/components/ui/debounced-select";
 
 export default function CreateCategoryForm() {
   const queryClient = useQueryClient();
@@ -26,7 +26,7 @@ export default function CreateCategoryForm() {
   const form = useForm({
     initialValues: {
       name: "",
-      parentId: null as string | null,
+      parentId: "",
     },
     validate: zod4Resolver(validateCreateCategoryForm),
     validateInputOnBlur: true,
@@ -59,7 +59,7 @@ export default function CreateCategoryForm() {
       />
 
       <Box mt={"md"}>
-        <DebouncedCombobox
+        <DebouncedSelect
           label="Родительская категория"
           placeholder="Поиск категории"
           value={form.values.parentId}
@@ -71,6 +71,7 @@ export default function CreateCategoryForm() {
               value: category.id,
             }));
           }}
+          error={form.errors.parentId}
         />
       </Box>
 
