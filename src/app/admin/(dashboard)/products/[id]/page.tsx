@@ -1,9 +1,9 @@
 import React from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/query-client";
-import { Container, Title, Paper } from "@mantine/core";
+import { Container, Paper } from "@mantine/core";
 import { getProduct } from "../api/api";
-import { ProductDetails } from "../components/product-details";
+import { ProductDetails } from "../components/ProductDetails";
 
 export default async function Page({
   params,

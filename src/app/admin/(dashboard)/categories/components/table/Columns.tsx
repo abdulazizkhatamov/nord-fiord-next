@@ -1,7 +1,7 @@
 import type { ColumnDef, RowData } from "@tanstack/react-table";
 import { TableColumnHeader } from "@/components/table/table-column-header";
-import { CategoryType } from "../../data/category";
-import { TableRowActions } from "./table-row-actions";
+import { CategoryType } from "../../data/categorySchema";
+import { TableRowActions } from "./TableRowActions";
 import { Flex } from "@mantine/core";
 
 declare module "@tanstack/react-table" {

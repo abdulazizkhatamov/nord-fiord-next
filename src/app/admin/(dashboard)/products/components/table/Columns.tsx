@@ -3,7 +3,7 @@ import type { ColumnDef, RowData } from "@tanstack/react-table";
 import { format } from "date-fns";
 import { Badge, Flex } from "@mantine/core";
 import { TableColumnHeader } from "@/components/table/table-column-header";
-import { TableRowActions } from "./table-row-actions";
+import { TableRowActions } from "./TableRowActions";
 import { ProductType } from "../../data/product";
 
 declare module "@tanstack/react-table" {

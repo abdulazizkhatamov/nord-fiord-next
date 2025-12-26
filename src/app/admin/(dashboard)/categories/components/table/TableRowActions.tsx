@@ -2,7 +2,7 @@ import { IconDots } from "@tabler/icons-react";
 
 import type { Row } from "@tanstack/react-table";
 import Link from "next/link";
-import { categorySchema } from "../../data/category";
+import { categorySchema } from "../../data/categorySchema";
 import { ActionIcon, Menu } from "@mantine/core";
 
 interface TableRowActionsProps<TData> {

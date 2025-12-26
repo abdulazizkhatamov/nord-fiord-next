@@ -1,5 +1,5 @@
 import { PaginatedData } from "@/types/api-types";
-import { CategoryFilterType, CategoryType } from "../data/category";
+import { CategoryFilterType, CategoryType } from "../data/categorySchema";
 import { DEFAULT_PAGE_INDEX, DEFAULT_PAGE_SIZE } from "@/const/pagination";
 import axiosInstance from "@/config/axios";
 

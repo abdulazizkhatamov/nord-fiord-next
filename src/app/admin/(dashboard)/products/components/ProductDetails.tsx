@@ -14,7 +14,7 @@ import {
   Box,
 } from "@mantine/core";
 import parse from "html-react-parser";
-import { ImagesForm } from "./forms/images-form";
+import { ImagesForm } from "./forms/ImagesForm";
 
 interface ProductDetailsProps {
   productId: string;

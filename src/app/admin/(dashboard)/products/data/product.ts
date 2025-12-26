@@ -4,7 +4,7 @@ import { formSchema } from "../../forms/data/form";
 import { effectSchema } from "../../effects/data/effect";
 import { ingredientSchema } from "../../ingredients/data/ingredient";
 import { audienceSchema } from "../../audiences/data/audience";
-import { categorySchema } from "../../categories/data/category";
+import { categorySchema } from "../../categories/data/categorySchema";
 
 // New ProductImage schema
 export const productImageSchema = z.object({

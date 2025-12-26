@@ -1,5 +1,5 @@
 import React from "react";
-import CreateCategoryForm from "../components/forms/create-category-form";
+import CreateCategoryForm from "../components/forms/CreateCategoryForm";
 import { Container, Title } from "@mantine/core";
 
 export default function Page() {

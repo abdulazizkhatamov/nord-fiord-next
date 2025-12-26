@@ -3,7 +3,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/query-client";
 import { Container, Title } from "@mantine/core";
 import { getProduct } from "../../api/api";
-import UpdateProductForm from "../../components/forms/update-product-form";
+import UpdateProductForm from "../../components/forms/UpdateCategoryForm";
 
 export default async function Page({
   params,

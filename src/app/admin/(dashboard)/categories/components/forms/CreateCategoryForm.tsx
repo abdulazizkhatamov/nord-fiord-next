@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Alert, Box, Button, Group, TextInput } from "@mantine/core";
 
 import { postCategory, getCategories } from "../../api/api";
-import { validateCreateCategoryForm } from "../../data/form-validation";
+import { validateCreateCategoryForm } from "../../data/formValidation";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 import { toast } from "sonner";
 import { DebouncedSelect } from "@/components/ui/debounced-select";

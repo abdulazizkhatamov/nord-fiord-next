@@ -1,5 +1,5 @@
 import React from "react";
-import UpdateCategoryForm from "../../components/forms/update-category-form";
+import UpdateCategoryForm from "../../components/forms/UpdateCategoryForm";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/lib/query-client";
 import { getCategory } from "../../api/api";

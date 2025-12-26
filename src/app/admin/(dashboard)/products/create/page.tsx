@@ -1,6 +1,6 @@
 // app/products/create/page.tsx
 import { Container, Title } from "@mantine/core";
-import CreateProductForm from "../components/forms/create-product-form";
+import CreateProductForm from "../components/forms/CreateProductForm";
 
 export default async function Page() {
   return (

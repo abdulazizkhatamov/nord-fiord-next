@@ -9,7 +9,7 @@ import { Alert, Box, Button, Group, TextInput } from "@mantine/core";
 import { zod4Resolver } from "mantine-form-zod-resolver";
 
 import { putCategory, getCategories, getCategory } from "../../api/api";
-import { validateUpdateCategoryForm } from "../../data/form-validation";
+import { validateUpdateCategoryForm } from "../../data/formValidation";
 import { toast } from "sonner";
 import { DebouncedSelect } from "@/components/ui/debounced-select";
 

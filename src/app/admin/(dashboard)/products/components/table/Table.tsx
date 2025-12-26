@@ -17,7 +17,7 @@ import type {
 import { Filters } from "@/types/api-types";
 import { Box, Skeleton, Table } from "@mantine/core";
 import { TablePagination } from "@/components/table/table-pagination";
-import { TableToolbar } from "./table-toolbar";
+import { TableToolbar } from "./TableToolbar";
 
 interface TableProps<TData, TValue> {
   columns: Array<ColumnDef<TData, TValue>>;
